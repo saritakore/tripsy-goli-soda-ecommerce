@@ -43,7 +43,11 @@ A complete e-commerce web application developed for **Andodagi & Son’s** to ma
 5. Update database credentials
 6. Open browser: http://localhost/tripsy
 
-
+## Database Setup
+1. Create a database named `tripsy_db`
+2. Import `database/tripsy_db.sql` using phpMyAdmin
+3. Rename `config.sample.php` to `config.php`
+4. Update database credentials if required
 
 ## 📸 Screenshots
 
