@@ -36,6 +36,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 <?php include("header.php"); ?>
 
 <h2 class="cart-title">My Cart</h2>
@@ -50,6 +51,7 @@ if (empty($_SESSION['cart'])) {
 } else {
 
     foreach ($_SESSION['cart'] as $id => $qty) {
+
         $res = mysqli_query($conn, "SELECT * FROM products WHERE id=$id");
         $row = mysqli_fetch_assoc($res);
 
@@ -83,22 +85,37 @@ if (empty($_SESSION['cart'])) {
 
 </div>
 
+<?php
+/* DELIVERY CHARGE LOGIC */
+if ($total >= 499) {
+    $delivery = 0;
+    $deliveryText = "FREE";
+} else {
+    $delivery = 49;
+    $deliveryText = "₹49";
+}
+
+$finalTotal = $total + $delivery;
+?>
+
 <!-- Continue Shopping -->
 <div class="continue-shopping">
     <a href="products.php">← Continue Shopping</a>
 </div>
 
-<!-- Cart Total -->
+<!-- BILL SUMMARY -->
 <div class="cart-total">
-    <h3>Total: ₹<?php echo $total; ?></h3>
+    <p>Subtotal: ₹<?php echo $total; ?></p>
+    <p>Delivery Charges: <?php echo $deliveryText; ?></p>
+    <hr>
+    <h3>Total Payable: ₹<?php echo $finalTotal; ?></h3>
 </div>
 
-<!-- LOGIN OR BILLING SECTION -->
+<!-- LOGIN OR CHECKOUT -->
 <div class="cart-wrapper">
 
 <?php if (!$isLoggedIn && !empty($_SESSION['cart'])) { ?>
 
-    <!-- Not logged in -->
     <div class="login-required">
         <p>Please login to continue checkout</p>
         <a href="login.php" class="checkout-btn">Login to Continue</a>
@@ -106,7 +123,6 @@ if (empty($_SESSION['cart'])) {
 
 <?php } elseif ($isLoggedIn && !empty($_SESSION['cart'])) { ?>
 
-    <!-- Logged in → Billing Form -->
     <form method="POST" action="checkout.php" class="billing-form">
 
         <h3>Billing Details</h3>
@@ -120,10 +136,30 @@ if (empty($_SESSION['cart'])) {
             <input type="text" name="pincode" placeholder="Pincode" required>
         </div>
 
-        <input type="hidden" name="total" value="<?php echo $total; ?>">
+
+
+        <h3>Payment Method</h3>
+        <div class="payment-options">
+
+       <label class="payment-option">
+           <input type="radio" name="payment_method" value="COD" required>
+           Cash on Delivery
+       </label>
+
+       <label class="payment-option">
+           <input type="radio" name="payment_method" value="Online">
+        Online Payment
+       </label>
+
+       </div>
+
+        <!-- HIDDEN TOTALS -->
+        <input type="hidden" name="subtotal" value="<?php echo $total; ?>">
+        <input type="hidden" name="delivery_charge" value="<?php echo $delivery; ?>">
+        <input type="hidden" name="total" value="<?php echo $finalTotal; ?>">
 
         <button type="submit" class="checkout-btn">
-            Proceed to Place Order
+         Place Order
         </button>
 
     </form>
