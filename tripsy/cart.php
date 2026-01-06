@@ -9,6 +9,17 @@ if (!isset($_SESSION['cart'])) {
 
 $isLoggedIn = isset($_SESSION['user_id']);
 
+/* Fetch user details if logged in */
+$userData = null;
+if ($isLoggedIn) {
+    $uid = $_SESSION['user_id'];
+    $userRes = mysqli_query(
+        $conn,
+        "SELECT name, email, mobile FROM users WHERE id = $uid"
+    );
+    $userData = mysqli_fetch_assoc($userRes);
+}
+
 /* Handle add / remove */
 if (isset($_GET['action']) && isset($_GET['id'])) {
     $id = (int)$_GET['id'];
@@ -89,7 +100,7 @@ if (empty($_SESSION['cart'])) {
 /* DELIVERY CHARGE LOGIC */
 if ($total >= 499) {
     $delivery = 0;
-    $deliveryText = "FREE";
+    $deliveryText = "<span class='free-delivery'>FREE</span>";
 } else {
     $delivery = 49;
     $deliveryText = "₹49";
@@ -127,8 +138,18 @@ $finalTotal = $total + $delivery;
 
         <h3>Billing Details</h3>
 
-        <input type="text" name="name" placeholder="Full Name" required>
-        <input type="text" name="mobile" placeholder="Mobile Number" required>
+        <input type="text"
+               value="<?php echo $userData['name']; ?>"
+               readonly>
+
+        <input type="email"
+               value="<?php echo $userData['email']; ?>"
+               readonly>
+
+        <input type="text"
+               value="<?php echo $userData['mobile']; ?>"
+               readonly>
+
         <textarea name="address" placeholder="Full Address" required></textarea>
 
         <div class="billing-row">
@@ -136,22 +157,20 @@ $finalTotal = $total + $delivery;
             <input type="text" name="pincode" placeholder="Pincode" required>
         </div>
 
-
-
         <h3>Payment Method</h3>
         <div class="payment-options">
 
-       <label class="payment-option">
-           <input type="radio" name="payment_method" value="COD" required>
-           Cash on Delivery
-       </label>
+            <label class="payment-option">
+                <input type="radio" name="payment_method" value="COD" required>
+                Cash on Delivery
+            </label>
 
-       <label class="payment-option">
-           <input type="radio" name="payment_method" value="Online">
-        Online Payment
-       </label>
+            <label class="payment-option">
+                <input type="radio" name="payment_method" value="Online">
+                Online Payment
+            </label>
 
-       </div>
+        </div>
 
         <!-- HIDDEN TOTALS -->
         <input type="hidden" name="subtotal" value="<?php echo $total; ?>">
@@ -159,7 +178,7 @@ $finalTotal = $total + $delivery;
         <input type="hidden" name="total" value="<?php echo $finalTotal; ?>">
 
         <button type="submit" class="checkout-btn">
-         Place Order
+            Place Order
         </button>
 
     </form>
