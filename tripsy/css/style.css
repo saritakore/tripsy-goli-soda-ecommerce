@@ -356,6 +356,34 @@ header {
     border: none;
 }
 
+/* Make readonly fields (name, email, mobile) look auto-filled */
+.billing-form input[readonly] {
+    background-color: #f3f4f6;   /* light grey */
+    color: #444;
+    cursor: not-allowed;
+}
+
+/* Ensure email input looks same as others */
+.billing-form input[type="email"] {
+    font-size: 14px;
+}
+
+/* Improve textarea look */
+.billing-form textarea {
+    resize: none;
+    height: 80px;
+}
+
+/* Payment section spacing */
+.payment-options {
+    margin: 15px 0;
+}
+
+/* Better hover for button */
+.checkout-btn:hover {
+    background: #218838;
+}
+
 
 /* =========================================================
    FOOTER
