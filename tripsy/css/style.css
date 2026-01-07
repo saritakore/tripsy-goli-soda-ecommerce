@@ -9,8 +9,73 @@
 }
 
 body {
-    background-color: #f7f9fc;     /* SAME FOR ALL PAGES */
-    color: #000;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f9fc;
+    color: black;
+}
+
+
+
+/* =========================================================
+   COMMON FORM BOX (LOGIN & REGISTER)
+   ========================================================= */
+.form-box {
+    width: 360px;
+    margin: 80px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.form-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1b2a6b;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.form-box button {
+    width: 100%;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form-box button:hover {
+    background: #218838;
+}
+
+.form-box .center {
+    text-align: center;
+    margin-top: 12px;
+}
+
+.form-box a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-box a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 
@@ -36,14 +101,14 @@ header {
 }
 
 .logo img {
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
 }
 
 .logo h2 {
+    color: white;
     font-size: 20px;
     font-weight: 600;
-    color: white;
 }
 
 /* Right side */
@@ -53,18 +118,16 @@ header {
     gap: 20px;
 }
 
-/* Navigation links */
 .nav-links a {
-    color: #ffffff;
+    color: white;
     margin-left: 18px;
     text-decoration: none;
-    font-weight: 500;
     position: relative;
-    font-size: 15px;
+    font-weight: 500;
 }
 
-.nav-links a.active::after,
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -80,15 +143,13 @@ header {
     border-radius: 20px;
     border: none;
     outline: none;
-    font-size: 14px;
-    width: 180px;
 }
 
-/* Cart icon */
+/* Cart */
 .cart-icon {
-    position: relative;
     font-size: 22px;
     color: white;
+    position: relative;
     text-decoration: none;
 }
 
@@ -101,10 +162,9 @@ header {
     font-size: 12px;
     padding: 2px 6px;
     border-radius: 50%;
-    font-weight: bold;
 }
 
-/* My Account dropdown */
+/* Account Dropdown */
 .account-menu {
     position: relative;
     cursor: pointer;
@@ -121,8 +181,8 @@ header {
     right: 0;
     top: 30px;
     background: white;
-    min-width: 160px;
     border-radius: 6px;
+    min-width: 160px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.15);
     z-index: 1000;
 }
@@ -130,9 +190,8 @@ header {
 .account-dropdown a {
     display: block;
     padding: 10px 14px;
-    text-decoration: none;
     color: #333;
-    font-size: 14px;
+    text-decoration: none;
 }
 
 .account-dropdown a:hover {
@@ -152,10 +211,11 @@ header {
     display: flex;
     align-items: center;
     padding: 60px;
-    background-image: url("../uploads/home_banner2.png");
-    background-size: cover;
-    background-position: center;
+
+    background: url("../uploads/home_banner2.png") center/cover no-repeat;
     border-radius: 0 0 40px 40px;
+
+    margin-bottom: 0;   /* FIX: remove white gap */
 }
 
 .hero-text {
@@ -173,16 +233,16 @@ header {
 
 .hero-text p {
     margin-top: 15px;
-    font-size: 18px;
     color: orangered;
+    font-size: 18px;
 }
 
 .hero-text button {
     margin-top: 25px;
     padding: 14px 35px;
     background: orange;
-    border: none;
     border-radius: 30px;
+    border: none;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -192,35 +252,147 @@ header {
 /* =========================================================
    ABOUT SECTION
    ========================================================= */
+
+
 .about-card {
-    background: white;
-    margin: -60px 90px 40px;
-    padding: 40px;
+    background-image: url("../uploads/about_banner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding: 50px;
+    width: 42%;
+    margin: -110px 0 0 100px;
+
     border-radius: 20px;
-    width: 40%;
     box-shadow: 0 15px 30px rgba(0,0,0,0.18);
+
+    position: relative;
+    z-index: 10;
+    overflow: hidden; /* IMPORTANT */
 }
 
-.about-card h3 {
-    color: #1b2a6b;
+.about-card h3 { 
+    color: #1b2a6b; 
+    margin-bottom: 15px; }
+
+/* =========================================================
+   WHY CHOOSE + FEEDBACK (FINAL FIX)
+   ========================================================= */
+
+.why-choose {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+
+    background: linear-gradient(135deg, #3365ca, #163b9c);
+
+    padding: 120px 70px 60px;  /* top padding adjusted */
+    margin-top: -90px;        /* KEY FIX */
+
+    color: white;
+}
+
+
+
+/* LEFT SIDE */
+.features {
+    color: white;
+    max-width: 55%;
+}
+
+.features h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.features ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.features li {
+    font-size: 16px;
+    margin-bottom: 14px;
+    padding-left: 26px;
+    position: relative;
+}
+
+.features li::before {
+    content: "✔";
+    color: orange;
+    position: absolute;
+    left: 0;
+}
+
+
+/* RIGHT SIDE FEEDBACK */
+
+.feedback {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    width: 300px;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.feedback h4 {
+    text-align: center;
     margin-bottom: 15px;
+    color: #1b2a6b;
+}
+
+.feedback input,
+.feedback textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.feedback textarea {
+    resize: none;
+    height: 80px;
+}
+
+.feedback button {
+    width: 100%;
+    padding: 10px;
+    background: orange;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.feedback button:hover {
+    background: #ff9800;
 }
 
 
 /* =========================================================
    PRODUCTS
    ========================================================= */
+.section {
+    padding: 40px 60px;
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1b2a6b;
+}
+
 .products-container {
     width: 90%;
     margin: 30px auto;
     background: white;
     padding: 25px;
     border-radius: 12px;
-}
-
-.products-container h2 {
-    text-align: center;
-    margin-bottom: 25px;
 }
 
 .products-grid {
@@ -236,17 +408,11 @@ header {
     padding: 18px;
     text-align: center;
     box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-    transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 22px rgba(0,0,0,0.15);
 }
 
 .product-card img {
-    width: 150px;
-    height: 180px;
+    width: 140px;
+    height: 170px;
     object-fit: contain;
 }
 
@@ -256,8 +422,8 @@ header {
 }
 
 .add-cart-btn {
-    margin-top: 12px;
     display: inline-block;
+    margin-top: 10px;
     background: #28a745;
     color: white;
     padding: 8px 16px;
@@ -286,16 +452,19 @@ header {
 .cart-item {
     display: flex;
     align-items: center;
-    padding: 15px;
+    gap: 15px;
     margin-bottom: 18px;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+}
+
+.cart-item img {
+    width: 80px;
+    height: auto;
 }
 
 .qty-box {
     display: flex;
-    align-items: center;
     gap: 12px;
+    margin-top: 10px;
 }
 
 .qty-box span {
@@ -336,6 +505,11 @@ header {
     border-radius: 5px;
 }
 
+.billing-form input[readonly] {
+    background: #f3f4f6;
+    cursor: not-allowed;
+}
+
 .billing-row {
     display: flex;
     gap: 10px;
@@ -356,30 +530,6 @@ header {
     border: none;
 }
 
-/* Make readonly fields (name, email, mobile) look auto-filled */
-.billing-form input[readonly] {
-    background-color: #f3f4f6;   /* light grey */
-    color: #444;
-    cursor: not-allowed;
-}
-
-/* Ensure email input looks same as others */
-.billing-form input[type="email"] {
-    font-size: 14px;
-}
-
-/* Improve textarea look */
-.billing-form textarea {
-    resize: none;
-    height: 80px;
-}
-
-/* Payment section spacing */
-.payment-options {
-    margin: 15px 0;
-}
-
-/* Better hover for button */
 .checkout-btn:hover {
     background: #218838;
 }
@@ -395,3 +545,4 @@ footer {
     padding: 15px;
     margin-top: 30px;
 }
+
