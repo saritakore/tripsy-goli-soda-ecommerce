@@ -28,16 +28,20 @@ $cartCount = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 </section>
 
 
-<!-- ABOUT CARD -->
-<div class="about-card">
-    <h3>About Andodagi & Son’s</h3>
-    <p>
-        Andodagi & Son’s is a small-scale beverage manufacturing company
-        located at Kumbhari, South Solapur, Maharashtra.
-        We specialize in producing Tripsy Goli Soda with traditional Indian
-        flavours using modern hygienic processes.
-    </p>
-</div>
+
+<!-- ABOUT SECTION WITH BACKGROUND -->
+
+<section class="about-section">
+    <div class="about-card">
+        <h3>About Andodagi & Son’s</h3>
+        <p>
+            Andodagi & Son’s is a small-scale beverage manufacturing company
+            located at Kumbhari, South Solapur, Maharashtra.
+            We specialize in producing Tripsy Goli Soda with traditional Indian
+            flavours using modern hygienic processes.
+        </p>
+    </div>
+</section>
 
 <!-- WHY CHOOSE + FEEDBACK -->
 <section class="why-choose" id="contact">
